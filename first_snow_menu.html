@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>First Snow Cocktail Party</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap');
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #0a1929 0%, #1e3a5f 50%, #2d5078 100%);
+    color: #e8f4f8;
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  /* Animated falling snow */
+  .snowflake {
+    position: fixed;
+    top: -10px;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
+    animation: fall linear infinite;
+  }
+  
+  @keyframes fall {
+    to {
+      transform: translateY(100vh) rotate(360deg);
+    }
+  }
+  
+  .menu-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 60px 50px;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Decorative corner snowflakes */
+  .menu-container::before,
+  .menu-container::after {
+    content: '❄';
+    position: absolute;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.15);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  .menu-container::before {
+    top: 20px;
+    left: 20px;
+  }
+  
+  .menu-container::after {
+    bottom: 20px;
+    right: 20px;
+    animation-delay: 1.5s;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.1); }
+  }
+  
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ffffff, #b8d4e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeIn 1s ease-out 0.3s both;
+  }
+  
+  h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #a8c5d8;
+    margin-bottom: 50px;
+    animation: fadeIn 1s ease-out 0.6s both;
+  }
+  
+  .snow-divider {
+    text-align: center;
+    font-size: 24px;
+    margin: 50px 0 40px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 20px;
+    animation: fadeIn 1s ease-out 0.9s both;
+  }
+  
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 40px 0 20px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 12px;
+    position: relative;
+    animation: slideIn 0.8s ease-out both;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, #ffffff, transparent);
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .drink-item {
+    margin-bottom: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.8s ease-out both;
+  }
+  
+  .drink-item:hover {
+    transform: translateX(8px);
+    background: rgba(255, 255, 255, 0.03);
+    padding-left: 12px;
+    border-radius: 8px;
+  }
+  
+  .drink-item:last-child {
+    border-bottom: none;
+  }
+  
+  .drink-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  
+  .ingredients {
+    font-size: 14px;
+    font-weight: 300;
+    color: #b8d4e8;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Stagger animation delays for each section */
+  .whiskey-section .drink-item:nth-child(1) { animation-delay: 0.1s; }
+  .whiskey-section .drink-item:nth-child(2) { animation-delay: 0.2s; }
+  .rum-section .drink-item:nth-child(1) { animation-delay: 0.1s; }
+  .rum-section .drink-item:nth-child(2) { animation-delay: 0.2s; }
+  .rum-section .drink-item:nth-child(3) { animation-delay: 0.3s; }
+  .rum-section .drink-item:nth-child(4) { animation-delay: 0.4s; }
+  .gin-section .drink-item:nth-child(1) { animation-delay: 0.1s; }
+  .gin-section .drink-item:nth-child(2) { animation-delay: 0.2s; }
+  .gin-section .drink-item:nth-child(3) { animation-delay: 0.3s; }
+  .gin-section .drink-item:nth-child(4) { animation-delay: 0.4s; }
+  .gin-section .drink-item:nth-child(5) { animation-delay: 0.5s; }
+  .agave-section .drink-item:nth-child(1) { animation-delay: 0.1s; }
+  .agave-section .drink-item:nth-child(2) { animation-delay: 0.2s; }
+  .pisco-section .drink-item:nth-child(1) { animation-delay: 0.1s; }
+  
+  @media (max-width: 768px) {
+    .menu-container {
+      padding: 40px 30px;
+    }
+    
+    h1 {
+      font-size: 40px;
+    }
+    
+    .section-title {
+      font-size: 26px;
+    }
+  }
+</style>
+</head>
+<body>
+  <!-- Falling snow effect -->
+  <div class="snowflake" style="left: 10%; animation-duration: 10s; animation-delay: 0s;">❄</div>
+  <div class="snowflake" style="left: 20%; animation-duration: 12s; animation-delay: 2s;">❅</div>
+  <div class="snowflake" style="left: 30%; animation-duration: 15s; animation-delay: 4s;">❄</div>
+  <div class="snowflake" style="left: 40%; animation-duration: 11s; animation-delay: 1s;">❅</div>
+  <div class="snowflake" style="left: 50%; animation-duration: 13s; animation-delay: 3s;">❄</div>
+  <div class="snowflake" style="left: 60%; animation-duration: 14s; animation-delay: 5s;">❅</div>
+  <div class="snowflake" style="left: 70%; animation-duration: 10s; animation-delay: 0.5s;">❄</div>
+  <div class="snowflake" style="left: 80%; animation-duration: 12s; animation-delay: 2.5s;">❅</div>
+  <div class="snowflake" style="left: 90%; animation-duration: 11s; animation-delay: 4.5s;">❄</div>
+  <div class="snowflake" style="left: 15%; animation-duration: 13s; animation-delay: 1.5s;">❅</div>
+  <div class="snowflake" style="left: 85%; animation-duration: 14s; animation-delay: 3.5s;">❄</div>
+
+  <div class="menu-container">
+    <h1>First Snow</h1>
+    <h2>Cocktail Party</h2>
+
+    <div class="snow-divider">❄ ❄ ❄</div>
+
+    <div class="section-title">Whiskey</div>
+    <div class="whiskey-section">
+      <div class="drink-item">
+        <div class="drink-name">Halekulani Cocktail</div>
+        <div class="ingredients">Bourbon or rye · Lemon · Orange · Pineapple · Demerara · Grenadine · Angostura</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Trinidad Sour</div>
+        <div class="ingredients">Overproof rye · Angostura bitters · Orgeat · Lemon</div>
+      </div>
+    </div>
+
+    <div class="section-title">Rum</div>
+    <div class="rum-section">
+      <div class="drink-item">
+        <div class="drink-name">Roselita</div>
+        <div class="ingredients">Column-still aged rum · Seltzer · Lime · Orgeat · Hibiscus liqueur · Pear liqueur · Peychaud's</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Hurricane (TOTR)</div>
+        <div class="ingredients">White rum · Aged rum · Overproof Jamaican rum · Lemon · Orange · Passionfruit · Vanilla</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Sidewinder's Fang</div>
+        <div class="ingredients">Black rum · Aged rum · Orange · Lime · Passionfruit · Club soda</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Mai Tai (Smuggler's Cove)</div>
+        <div class="ingredients">Aged rum · Curaçao · Lime · Orgeat · Rich simple syrup</div>
+      </div>
+    </div>
+
+    <div class="section-title">Gin</div>
+    <div class="gin-section">
+      <div class="drink-item">
+        <div class="drink-name">Humuhumunukunukuapua'a</div>
+        <div class="ingredients">Gin · Lemon · Pineapple · Orgeat · Peychaud's</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Singapore Sling</div>
+        <div class="ingredients">London dry gin · Seltzer · Lemon · Demerara · Cherry liqueur · Benedictine · Angostura · Orange bitters</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Saturn</div>
+        <div class="ingredients">Gin · Falernum · Lemon · Passionfruit · Orgeat</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Tarzan</div>
+        <div class="ingredients">Gin · Campari · Pineapple · Lemon · Simple syrup · Club soda</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Army & Navy</div>
+        <div class="ingredients">Gin · Lemon · Orgeat · Angostura</div>
+      </div>
+    </div>
+
+    <div class="section-title">Agave Spirits</div>
+    <div class="agave-section">
+      <div class="drink-item">
+        <div class="drink-name">Dead Man's Handle</div>
+        <div class="ingredients">Tequila blanco · Aperol · Lime · Orgeat</div>
+      </div>
+      <div class="drink-item">
+        <div class="drink-name">Port of Spain</div>
+        <div class="ingredients">Mezcal · Angostura bitters · Lime · Orgeat</div>
+      </div>
+    </div>
+
+    <div class="section-title">Pisco</div>
+    <div class="pisco-section">
+      <div class="drink-item">
+        <div class="drink-name">The Snowflake</div>
+        <div class="ingredients">Pisco · Gin · Lime · Passionfruit · Velvet falernum · Fruit bitters</div>
+      </div>
+    </div>
+
+    <div class="snow-divider">❄ ❄ ❄</div>
+  </div>
+</body>
+</html>
